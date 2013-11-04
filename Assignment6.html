@@ -1,0 +1,187 @@
+<!doctype html>
+ 
+<html>
+<head>
+
+  <title>Assignment6</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+  <style>
+	  #central, #southeast { 
+	   list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; 
+	   }
+	  #central li, #southeast li { 
+	   margin: 5px 5px 5px 5px; padding: 5px; font-size: 1.5em; width: 100px; 
+	   }
+	  
+	  .border {
+	   width: 500px; height: 100px;
+	   }
+	  .toggler { 
+	   width: 500px; height: 200px; position: relative; 
+	   }
+	   #button { 
+	   padding: .5em 1em; text-decoration: none; 
+	   }
+	   #effect { 
+	   width: 240px; height: 135px; padding: 0.4em; position: relative; background: #fff; 
+	   }
+	   #effect h3 {
+	   margin: 0; padding: 0.4em; text-align: center; 
+	   }
+   
+	    #accordion {
+		list-style: none;
+		margin: 30px 0;
+		padding: 0;
+		height: 200px;
+		overflow: hidden;
+		background: rgb(255,255,0);}
+		#accordion li {
+		float: left;
+		border-left:
+		display: block;
+		height: 170px;
+		width: 50px;
+		padding: 15px 0;
+		overflow: hidden;
+		color: rgb(0,0,0);
+		text-decoration: none;
+		font-size: 16px;
+		line-height: 1.5em;
+		border-left: 1px solid rgb(0,0,0);
+		}
+		#accordion li {
+		border: none;
+		border-right: 1px solid rgb(0,0,0);
+		float: left;
+		margin: 15px 15px 0 0;
+		}
+		#accordion li.active {
+		width: 450px;
+		}
+  </style>
+  <script>
+  //accordion
+	$(document).ready(function(){
+ 
+		activeItem = $("#accordion li:first");
+		$(activeItem).addClass('active');
+	 
+		$("#accordion li").hover(function(){
+			$(activeItem).animate({width: "70px"}, {duration:300, queue:false});
+			$(this).animate({width: "500px"}, {duration:300, queue:false});
+			activeItem = this;
+		});
+	 
+	});
+  //for drag and drop
+  $(function() {
+    $( "#central, #southeast"  ).sortable({
+      connectWith: ".connectedSortable"
+    }).disableSelection();
+  });
+  //animation 1
+  $(function() {
+    var state = true;
+    $( "#button" ).click(function() {
+      if ( state ) {
+        $( "#effect" ).animate({
+          backgroundColor: "#000000",
+          color: "#fff",
+          width: 480
+        }, 1000 );
+      } else {
+        $( "#effect" ).animate({
+          backgroundColor: "#fff",
+          color: "#000",
+          width: 240
+        }, 1000 );
+      }
+      state = !state;
+    });
+  });
+  
+ //animation2 toggle
+ $(document).ready(function(){
+  $("#buttonToggle").click(function(){
+    $("#toggleText").toggle();
+  });
+});
+
+//progress bar
+
+  $(function() {	
+		var x;
+		x=0;
+	$("#userInput").click(function(){
+			if( x  >= 100)
+				x = 0;
+			else
+				x = x + 5;
+				
+	    $( "#progressbar" ).progressbar({value: x});
+		});
+  });
+  
+  </script>
+</head>
+<body>
+<ul id="accordion">
+      <li>
+        <strong>Header 1</strong><br/>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis volutpat quam, non suscipit arcu accumsan at. Aliquam pellentesque.
+      </li>
+      <li>
+        <strong>Header 2</strong><br/>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis volutpat quam, non suscipit arcu accumsan at. Aliquam pellentesque.
+      </li>
+      <li>
+        <strong>Section 3</strong><br/>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis volutpat quam, non suscipit arcu accumsan at. Aliquam pellentesque.
+      </li>
+      <li>
+        <strong>Header 4</strong><br/>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In iaculis volutpat quam, non suscipit arcu accumsan at. Aliquam pellentesque.
+    </li>
+  </ul>
+<div class="border"></div>	
+ 
+ <div class="toggler">
+  <div id="effect" class="ui-widget-content ui-corner-all">
+    <h3 class="ui-widget-header ui-corner-all">Animation</h3>
+    <p>
+      Transform like a cat, meow!
+    </p>
+  </div>
+</div>
+<a href="#" id="button" class="ui-state-default ui-corner-all">Toggle</a>
+<div class="border"></div>
+
+<p id="toggleText">Pikapoo!</p>
+<button id="buttonToggle">Toggle</button>
+<div class="border"></div>
+
+<div id="progressbar"></div>
+<button id="userInput">Click ME</button>
+<div class="border"></div>
+
+ <ul id="central" class="connectedSortable">
+  <li class="ui-state-default">IND</li>
+  <li class="ui-state-default">DET</li>
+  <li class="ui-state-default">MIL</li>
+  <li class="ui-state-default">CHI</li>
+  <li class="ui-state-default">CLE</li>
+</ul>
+
+<ul id="southeast" class="connectedSortable">
+  <li class="ui-state-highlight">ALT</li>
+  <li class="ui-state-highlight">ORL</li>
+  <li class="ui-state-highlight">CHA</li>
+  <li class="ui-state-highlight">MIA</li>
+  <li class="ui-state-highlight">WASH</li>
+</ul>
+</body>
+</html>
